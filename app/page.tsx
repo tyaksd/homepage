@@ -1,103 +1,134 @@
-import Image from "next/image";
+
+'use client'
+
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [isBlinking, setIsBlinking] = useState(false);
+  
+  const fullText = 'AI-native e-commerce stores';
+  
+  const handleContactClick = () => {
+    window.location.href = 'mailto:jack@godship.io';
+  };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    let typingTimer: NodeJS.Timeout;
+
+    if (isTyping) {
+      if (displayText.length < fullText.length) {
+        typingTimer = setTimeout(() => {
+          setDisplayText(fullText.slice(0, displayText.length + 1));
+        }, 80);
+      } else {
+        // タイピング完了後、少し待ってから点滅開始
+        setTimeout(() => {
+          setIsTyping(false);
+          setIsBlinking(true);
+        }, 200);
+      }
+    } else if (isBlinking) {
+      // 点滅アニメーション（2回点滅）
+      let blinkCount = 0;
+      const blinkInterval = setInterval(() => {
+        blinkCount++;
+        if (blinkCount >= 4) { // 2回点滅（表示・非表示）
+          clearInterval(blinkInterval);
+          setIsBlinking(false);
+          setDisplayText('');
+          setIsTyping(true);
+        }
+      }, 150);
+    }
+
+    return () => {
+      if (typingTimer) clearTimeout(typingTimer);
+    };
+  }, [displayText, isTyping, isBlinking, fullText]);
+
+  return (
+    <main className="min-h-screen flex flex-col relative" style={{
+      background: '#000000'
+    }}>
+      {/* Header with Logo */}
+      <header className="p-4 sm:p-8">
+        <div className="relative">
+          <Image
+            src="/godship-logo.png"
+            alt="GODSHIP"
+            width={200}
+            height={60}
+            className="h-6 sm:h-6 w-auto"
+            priority
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center sm:px-8" style={{ marginTop: '-5vh' }}>
+        <div className="text-center space-y-6 sm:space-y-8 max-w-9xl mx-auto">
+          {/* Main Text */}
+          <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight sm:px-4" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+            We design and manage<br />
+            <span 
+              className={isBlinking ? 'animate-pulse' : ''}
+              style={{
+                background: 'linear-gradient(45deg, #60A5FA, #3B82F6, #1D4ED8, #1E40AF)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundSize: '200% 200%',
+                animation: isBlinking ? 'pulse 0.15s ease-in-out infinite' : 'gradientShift 3s ease infinite'
+              }}
+            >
+              {displayText}
+              {isTyping && displayText.length < fullText.length && (
+                <span className="animate-pulse">|</span>
+              )}
+            </span>
+          </h1>
+
+          {/* Contact Button */}
+          <button 
+            onClick={handleContactClick}
+            className="px-6 sm:px-8 py-3 sm:py-4 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-sm sm:text-base cursor-pointer"
+            style={{
+              background: 'linear-gradient(45deg, #000000, #333333, #666666, #999999, #333333, #000000)',
+              backgroundSize: '300% 300%',
+              animation: 'buttonGradientShift 3s ease infinite'
+            }}
+          >
+            Contact Us
+          </button>
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
+        <p className="text-gray-400 text-xs sm:text-sm">
+          © 2025 Godship, Inc.
+        </p>
+      </div>
+
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes buttonGradientShift {
+          0% { background-position: 0% 50%; }
+          25% { background-position: 100% 50%; }
+          50% { background-position: 100% 100%; }
+          75% { background-position: 0% 100%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
+    </main>
   );
 }
+
