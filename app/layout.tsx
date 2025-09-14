@@ -15,6 +15,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Godship",
   description: "Godship designs and manages AI-native e-commerce stores.",
+  openGraph: {
+    title: "Godship",
+    description: "Godship designs and manages AI-native e-commerce stores.",
+    images: [
+      {
+        url: "/godship.png",
+        width: 1200,
+        height: 630,
+        alt: "Godship - AI-native e-commerce stores",
+      },
+    ],
+    type: "website",
+    siteName: "Godship",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Godship",
+    description: "Godship designs and manages AI-native e-commerce stores.",
+    images: ["/godship.png"],
+  },
 };
 
 export default function RootLayout({
