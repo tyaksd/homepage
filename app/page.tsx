@@ -9,7 +9,7 @@ export default function Home() {
   const [isBlinking, setIsBlinking] = useState(false);
   const [showSecondPage, setShowSecondPage] = useState(false);
   
-  const fullText = 'AI-native e-commerce stores';
+  const fullText = 'with AI and quantitative methods';
   
   const handleContactClick = () => {
     window.location.href = 'mailto:jack@godship.io';
@@ -88,11 +88,12 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center sm:px-8" style={{ marginTop: '-5vh' }}>
+      <div className="flex-1 flex items-center justify-center px-10 sm:px-8" style={{ marginTop: '-5vh' }}>
         <div className="text-center space-y-6 sm:space-y-8 max-w-9xl mx-auto">
           {/* Main Text */}
           <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight sm:px-4" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
             We design and manage<br />
+            e-commerce stores<br />
             <span 
               className={isBlinking ? 'animate-pulse' : ''}
               style={{
