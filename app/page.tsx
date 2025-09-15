@@ -88,7 +88,7 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-6 sm:px-8" style={{ marginTop: '-5vh' }}>
+      <div className="flex-1 flex items-center justify-center px-3 sm:px-8" style={{ marginTop: '-5vh' }}>
         <div className="text-center space-y-6 sm:space-y-8 max-w-9xl mx-auto">
           {/* Main Text */}
           <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight sm:px-4" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
