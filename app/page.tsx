@@ -92,8 +92,8 @@ export default function Home() {
         <div className="text-center space-y-6 sm:space-y-8 max-w-9xl mx-auto">
           {/* Main Text */}
           <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight sm:px-4" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-            We design and manage<br />
-            e-commerce stores<br />
+            We decode<br />
+            e-commerce market<br />
             <span 
               className={isBlinking ? 'animate-pulse' : ''}
               style={{
@@ -136,7 +136,7 @@ export default function Home() {
       </div>
 
       {/* Second Page - Portfolio Section */}
-      <div 
+      {/* <div 
         className={`min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 transition-all duration-1000 ${
           showSecondPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}
@@ -373,7 +373,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <style jsx>{`
         @keyframes gradientShift {
